@@ -43,11 +43,6 @@ namespace PatrimoineAPI.Migrations
                         {
                             Id = 1,
                             Name = "BoursoBank"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "BNP Paribas"
                         });
                 });
 
@@ -97,14 +92,6 @@ namespace PatrimoineAPI.Migrations
                             Cap = 12000,
                             InterestRate = 0.024m,
                             Name = "LDDS"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BankId = 2,
-                            Cap = 61200,
-                            InterestRate = 0.03m,
-                            Name = "PEL"
                         });
                 });
 
@@ -116,10 +103,10 @@ namespace PatrimoineAPI.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("Password");
+                        .HasColumnName("PasswordHash");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -129,6 +116,14 @@ namespace PatrimoineAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PasswordHash = "AQAAAAIAAYagAAAAEB5Dk81RPho0VpR7OuuWRvfrlEzJKOytTp3GuS5bVo7kNslNoEkDg1YLAwAnp/Thxw==",
+                            Username = "admin"
+                        });
                 });
 
             modelBuilder.Entity("PatrimoineAPI.Models.UserSavingsAccount", b =>

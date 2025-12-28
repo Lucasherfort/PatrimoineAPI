@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PatrimoineAPI.Services;
 using WebApplicationPatrimoine.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Controllers
 builder.Services.AddControllers();
+builder.Services.AddScoped<PatrimoineService>();
+builder.Services.AddScoped<BankService>();
+builder.Services.AddScoped<UserSavingsAccountService>();
 
 // DbContext MySQL
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -18,6 +22,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("Default"))
     );
 });
+
+builder.Services.AddScoped<PasswordService>();
 
 // Swagger / OpenAPI (Swashbuckle)
 builder.Services.AddEndpointsApiExplorer(); // nécessaire pour Swagger
@@ -39,7 +45,12 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
+
+//app.UseHttpsRedirection();
 
 app.MapControllers();
 

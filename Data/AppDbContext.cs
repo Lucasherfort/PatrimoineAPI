@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PatrimoineAPI.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebApplicationPatrimoine.Data
 {
@@ -19,17 +20,27 @@ namespace WebApplicationPatrimoine.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // ===== Seed User =====
+            var hasher = new PasswordHasher<string>();
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = 1,
+                    Username = "admin",
+                    PasswordHash = hasher.HashPassword(null!, "admin")
+                }
+            );
+
+
             // ===== Seed Banks =====
             modelBuilder.Entity<Bank>().HasData(
-                new Bank { Id = 1, Name = "BoursoBank" },
-                new Bank { Id = 2, Name = "BNP Paribas" }
+                new Bank { Id = 1, Name = "BoursoBank" }
             );
 
             // ===== Seed SavingsAccounts =====
             modelBuilder.Entity<SavingsAccount>().HasData(
                 new SavingsAccount { Id = 1, Name = "Livret A", InterestRate = 0.024M, Cap = 22950, BankId = 1 },
-                new SavingsAccount { Id = 2, Name = "LDDS", InterestRate = 0.024M, Cap = 12000, BankId = 1 },
-                new SavingsAccount { Id = 3, Name = "PEL", InterestRate = 0.03M, Cap = 61200, BankId = 2 }
+                new SavingsAccount { Id = 2, Name = "LDDS", InterestRate = 0.024M, Cap = 12000, BankId = 1 }
             );
         }
     }

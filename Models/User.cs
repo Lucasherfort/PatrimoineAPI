@@ -12,7 +12,7 @@ namespace PatrimoineAPI.Models
         [Column("Username")]
         public string Username { get; set; } = "";
 
-        [Column("Password")]
-        public string Password { get; set; } = "";
+        [Column("PasswordHash")]
+        public string PasswordHash { get; set; } = "";
     }
 }

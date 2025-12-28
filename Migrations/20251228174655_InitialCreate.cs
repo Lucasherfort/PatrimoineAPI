@@ -39,7 +39,7 @@ namespace PatrimoineAPI.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Username = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Password = table.Column<string>(type: "longtext", nullable: false)
+                    PasswordHash = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -104,11 +104,12 @@ namespace PatrimoineAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Banks",
                 columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 1, "BoursoBank" },
-                    { 2, "BNP Paribas" }
-                });
+                values: new object[] { 1, "BoursoBank" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "PasswordHash", "Username" },
+                values: new object[] { 1, "AQAAAAIAAYagAAAAEB5Dk81RPho0VpR7OuuWRvfrlEzJKOytTp3GuS5bVo7kNslNoEkDg1YLAwAnp/Thxw==", "admin" });
 
             migrationBuilder.InsertData(
                 table: "SavingsAccounts",
@@ -116,8 +117,7 @@ namespace PatrimoineAPI.Migrations
                 values: new object[,]
                 {
                     { 1, 1, 22950, 0.024m, "Livret A" },
-                    { 2, 1, 12000, 0.024m, "LDDS" },
-                    { 3, 2, 61200, 0.03m, "PEL" }
+                    { 2, 1, 12000, 0.024m, "LDDS" }
                 });
 
             migrationBuilder.CreateIndex(
