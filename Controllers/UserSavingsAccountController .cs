@@ -23,4 +23,11 @@ public class UserSavingsAccountController : ControllerBase
 
         return Ok(result);
     }
+
+    [HttpGet("user/{userId}")]
+    public async Task<IActionResult> GetByUser(int userId)
+    {
+        var accounts = await _service.GetByUserIdAsync(userId);
+        return Ok(accounts);
+    }
 }

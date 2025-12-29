@@ -1,4 +1,6 @@
-﻿using PatrimoineAPI.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PatrimoineAPI.DTOs;
+using PatrimoineAPI.Models;
 using WebApplicationPatrimoine.Data;
 
 public class UserSavingsAccountService
@@ -27,5 +29,19 @@ public class UserSavingsAccountService
         await _db.SaveChangesAsync();
 
         return account;
+    }
+    public async Task<List<UserSavingsAccountDto>> GetByUserIdAsync(int userId)
+    {
+        return await _db.UserSavingsAccounts
+            .Where(usa => usa.UserId == userId)
+            .Select(usa => new UserSavingsAccountDto
+            {
+                BankName = usa.SavingsAccount.Bank.Name,
+                AccountName = usa.SavingsAccount.Name,
+                Balance = usa.Balance,
+                InterestAccrued = usa.InterestAccrued
+            })
+            .AsNoTracking()
+            .ToListAsync();
     }
 }
