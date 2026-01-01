@@ -10,7 +10,7 @@ using WebApplicationPatrimoine.Data;
 
 namespace PatrimoineAPI.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20251228174655_InitialCreate")]
     partial class InitialCreate
     {

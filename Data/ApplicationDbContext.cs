@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Identity;
 
 namespace WebApplicationPatrimoine.Data
 {
-    public class AppDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
         public DbSet<User> Users => Set<User>();
         public DbSet<Bank> Banks => Set<Bank>();
         public DbSet<SavingsAccount> SavingsAccounts => Set<SavingsAccount>();
         public DbSet<UserSavingsAccount> UserSavingsAccounts => Set<UserSavingsAccount>();
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }

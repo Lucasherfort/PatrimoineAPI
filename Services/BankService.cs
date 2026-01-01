@@ -6,9 +6,9 @@ namespace PatrimoineAPI.Services
 {
     public class BankService
     {
-        private readonly AppDbContext _db;
+        private readonly ApplicationDbContext _db;
 
-        public BankService(AppDbContext db)
+        public BankService(ApplicationDbContext db)
         {
             _db = db;
         }

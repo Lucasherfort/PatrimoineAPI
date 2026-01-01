@@ -12,10 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddScoped<PatrimoineService>();
 builder.Services.AddScoped<BankService>();
-builder.Services.AddScoped<UserSavingsAccountService>();
+builder.Services.AddScoped<IUserSavingsAccountService, UserSavingsAccountService>();
+builder.Services.AddScoped<ISavingsAccountService, SavingsAccountService>();
 
 // DbContext MySQL
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseMySql(
         builder.Configuration.GetConnectionString("Default"),

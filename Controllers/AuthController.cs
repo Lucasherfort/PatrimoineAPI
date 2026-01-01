@@ -10,10 +10,10 @@ namespace PatrimoineAPI.Controllers
     [Route("api/auth")]
     public class AuthController : ControllerBase
     {
-        private readonly AppDbContext _db;
+        private readonly ApplicationDbContext _db;
         private readonly PasswordService _passwordService;
 
-        public AuthController(AppDbContext db, PasswordService passwordService)
+        public AuthController(ApplicationDbContext db, PasswordService passwordService)
         {
             _db = db;
             _passwordService = passwordService;

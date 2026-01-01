@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using PatrimoineAPI.Services;
 
 namespace PatrimoineAPI.Controllers
@@ -28,8 +29,8 @@ namespace PatrimoineAPI.Controllers
             }
         }
 
-        [HttpGet("{bankId}/accounts")]
-        public async Task<IActionResult> GetAccounts(int bankId)
+        [HttpGet("{bankId}/savingsAccounts")]
+        public async Task<IActionResult> GetAvailableSavingsAccounts(int bankId)
         {
             var accounts = await _bankService.GetAccountsByBankId(bankId);
             return Ok(accounts);
